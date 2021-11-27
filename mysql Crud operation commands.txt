@@ -48,7 +48,12 @@ product
 > db.DakshEmployee.find();
 
 
-# insert collections 
+
+
+
+                            # insert collections 
+
+
 
 Db.collection_name.insertMany({ })  -:it will insert one records 
 
@@ -111,7 +116,79 @@ WriteResult({
 })
 
 
+# we can define the variable and get out by calling the variable 
+
+> var a = db.person.findOne()
+> a
+{
+	"_id" : ObjectId("6181d780156980455d3cf1e5"),
+	"name" : {
+		"first" : "Harish",
+		"last" : "Chandra"
+	},
+	"gender" : "M",
+	"yearOfBirth" : 1962,
+	"livesIn" : "Mumbai",
+	"countriesVisited" : [
+		"India",
+		"Singapore",
+		"Thailand",
+		"United Kingdom",
+		"Spain",
+		"Denmark",
+		"United States of America"
+	],
+	"languages" : [
+		{
+			"name" : "Hindi",
+			"proficiency" : "Fluent"
+		},
+		{
+			"name" : "English",
+			"proficiency" : "Fluent"
+		},
+		{
+			"name" : "Sanskrit",
+			"proficiency" : "Intermediate"
+		}
+	]
+}
+
+
+
+# insert the multiple records for a variables by passing _id Value 
+
+for(i=1;i<=100;i++)db.newproduct.insert({_id:i ,prod_name: "motorola", price : 1500, availability : "coming soon" })
+WriteResult({ "nInserted" : 1 })
+
+
+# skip the first 2 document and retrive the next 2 document 
+
+> db.person.find().skip(2).limit(2);
+
+#sort the out put based on FirstName and get first 2 document 
+
+> for(i=1;i<=100;i++)db.temp1.insert({event_id:i})
+WriteResult({ "nInserted" : 1 })
+
+> db.temp1.find().skip(2).limit(2);
+{ "_id" : ObjectId("61a2465b5cdb05bd3b1b7a34"), "event_id" : 3 }
+{ "_id" : ObjectId("61a2465b5cdb05bd3b1b7a35"), "event_id" : 4 }
+
+> db.temp1.find().skip(2).limit(2).sort({event_id:1});
+{ "_id" : ObjectId("61a2465b5cdb05bd3b1b7a34"), "event_id" : 3 }
+{ "_id" : ObjectId("61a2465b5cdb05bd3b1b7a35"), "event_id" : 4 }
+
+> db.temp1.find().skip(2).limit(2).sort({event_id:-1});
+{ "_id" : ObjectId("61a2465b5cdb05bd3b1b7a93"), "event_id" : 98 }
+{ "_id" : ObjectId("61a2465b5cdb05bd3b1b7a92"), "event_id" : 97 }
+> 
+
+
+                                       # UPDATE
 
 				
+
+
 
 
