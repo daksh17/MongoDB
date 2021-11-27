@@ -76,6 +76,41 @@ db.DakshEmployee.insert(
 
 
 
+# User defined value of _ID column (could be anything except array)
+
+> db.product.insert({_id:"09ET402013",prod_name:"motorola",price:1500,availability:"coming soon"})
+   WriteResult({ "nInserted" : 1 })
+{ "_id" : "09ET402013", "prod_name" : "motorola", "price" : 1500, "availability" : "coming soon" }
+
+
+# Entering dupicate value of _ID will throw duplicate error
+
+> db.product.insert({_id:"09ET402013",prod_name:"nokia",price:1500,availability:"decomm"})
+     WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 11000,
+                "errmsg" : "E11000 duplicate key error collection: test.product index: _id_ dup key: { : \"09ET402013\" }"
+        }
+})
+
+# Inserting with other value 
+> db.product.insert({_id:"09ET402014",prod_name:"nokia",price:1500,availability:"decomm"})
+WriteResult({ "nInserted" : 1 })
+
+
+# Issue with array (error for _ID column )
+
+> db.products.insert({product_name:"daksh",price:4000,_id:[12,32]})
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 2,
+                "errmsg" : "can't use an array for _id"
+        }
+})
+
+
 
 				
 
