@@ -17,4 +17,66 @@ use local;
 switched to db local
 > db.startup_log.find();
 
+# command to see collections 
+
+show collections 
+
+
+# to see all the DB's 
+
+show dbs
+
+# to see currently connected DB 
+
+db
+
+#Create DATABASES -:
+Use -: swtiching between DB's / also it create new db if name not exist 
+						
+#Create COLLECTIONS
+db.createCollection("product")
+ { "ok" : 1 }
+# Since this collection we create under the test DB so now show dbs command will show test DB as well
+
+show collections
+product
+
+# Namespace -: always mongo DB refer collection as dbname.collectionName
+
+
+#command to retrive the Data 
+> db.DakshEmployee.find();
+
+
+# insert collections 
+
+Db.collection_name.insertMany({ })  -:it will insert one records 
+
+Db.collection_name.insertMany([{ },{}])  -:it will insert multiple records 
+
+
+db.DakshEmployee.insert(
+[ {
+	"Emp_id": 6,
+	"Emp_name": "kiran",
+	"Company": "JK mines",
+	"phone_no ": 9571561238,
+	"email ": "kiran34 @gmail.com ",
+	"salary ": 14000
+}, 
+{
+	"Emp_id ": 5,
+	"Emp_name": "jai",
+	"Company": "jk mines ",
+	"phone_no": "n / a ",
+	"email": "jai7 @gmail.com ",
+	"salary": 700
+}
+] )
+
+
+
+
+				
+
 
