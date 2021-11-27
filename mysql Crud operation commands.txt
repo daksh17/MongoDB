@@ -185,10 +185,23 @@ WriteResult({ "nInserted" : 1 })
 > 
 
 
+#                                        operators 
+
+
+
+
+
+
+
+
+
                                        # UPDATE
 
 				
+to update the keys Name  in document 
 
-
+	#command to change the field name 
+	db.person.update({},{$rename:{"FirstName":"First_Name"}},{multi:true})
+	
 
 
