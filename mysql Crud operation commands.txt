@@ -1,0 +1,9 @@
+# mysql Crud operation commands 
+
+# command to check the version of mysql 
+
+use admin ;
+db.system.version.find();
+
+
+
