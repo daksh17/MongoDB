@@ -188,6 +188,29 @@ WriteResult({ "nInserted" : 1 })
 #                                        operators 
 
 
+# alterNative to like operator 
+
+# anywhere in string keyword appear 
+> db.person.find({First_Name: /Ke/},{First_Name:1})
+
+{ "_id" : ObjectId("61a05c042b878dd893497f57"), "First_Name" : "Ken" }
+{ "_id" : ObjectId("61a05c042b878dd893497f67"), "First_Name" : "Kevin" }
+{ "_id" : ObjectId("61a05c042b878dd893497f90"), "First_Name" : "Kendall" }
+
+# last word for string will be "en"
+
+> db.person.find({First_Name: /en$/},{First_Name:1})
+{ "_id" : ObjectId("61a05c042b878dd893497f57"), "First_Name" : "Ken" }
+{ "_id" : ObjectId("61a05c042b878dd893497f9e"), "First_Name" : "Steven" }
+{ "_id" : ObjectId("61a05c042b878dd893497fa4"), "First_Name" : "Reuben" }
+
+
+# last word for string will be "Re"
+ 
+> db.person.find({First_Name: /^Re/},{First_Name:1})
+{ "_id" : ObjectId("61a05c042b878dd893497f76"), "First_Name" : "Rebecca" }
+{ "_id" : ObjectId("61a05c042b878dd893497fa4"), "First_Name" : "Reuben" }
+> 
 
 
 
