@@ -6,4 +6,15 @@ use admin ;
 db.system.version.find();
 
 
+# to see the users details 
+ db.system.users.find();
+
+
+
+# to check the logs detail 
+
+use local;
+switched to db local
+> db.startup_log.find();
+
 
