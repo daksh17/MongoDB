@@ -390,3 +390,58 @@ to update the keys Name  in document
 	
 
 
+	
+	Want to update all document by natioality =india  where first country =india 
+	
+	3 argument require
+	
+	1) Selection (if conditionally we want to update records then we have to use )
+	2) $Set /$unset
+	3) Multi
+
+
+
+
+Example -: for any person if the first country visited is india then we need to set nationality as indian 
+
+
+	Ø Db.person.Update ({"countryvisited.0":"India"},{$set:{nationality:"indian"}})
+	
+	By default this one update just one records which match condition  
+	
+	So we need to mention multi at end then it will change all records which match the condition 
+	
+	Ø Db.person.Update ({"countryvisited.0":"India"},{$set:{nationality:"indian"}},{multi:true})
+
+
+
+Here it will add the new key nationality : "Indian"in all document where first countryVisited is "india"
+
+But let say by mistakenly we added indian instead of IND so  now we need to change all docs where we set nationality as Indian
+
+Ø  Db.person.Update ({"nationality":"Indian"},{$set:{nationality:"IND"}},{multi:true})
+
+
+So it will insert if key is not exist but if exist then update the value 
+
+
+
+If we add new key on all document where projection is provided 
+
+
+$set will
+	•  add new key if that no there based on projection
+	• Or if its there then it update those based on projection
+ 
+
+	Ø Db.person.Update ({"countryvisited.0":"India"},{$set:{nationality:"indian"}},{multi:true})
+	
+	Change nationality to IND
+	
+	Ø Db.person.Update ({"nationality:"IND"},{$set:{nationality:"IND"}},{multi:true})
+	
+	
+	
+	
+	#command to change the field name 
+	db.person.update({},{$rename:{"FirstName":"First_Name"}},{multi:true})
