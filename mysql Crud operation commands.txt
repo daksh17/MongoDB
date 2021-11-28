@@ -292,7 +292,91 @@ Collection ..
 { "_id" : ObjectId("61a05c042b878dd893497fa4"), "First_Name" : "Reuben" }
 > 
 
+#  Operators on array document in collection
+		
+		
+for e.g.		Elements of array 
+		
+		"countriesVisited" :
+		[
+		"India",   --element 0
+		"Singapore",  --element 1
+		"Thailand",  --element 2
+		"United Kingdom", --element 3
+		"Spain", --element 4
+		"Denmark", --element 5
+		"usa"  --element 6
+		]
+		
+		
+		"Dot notation" it always under "" value
+		
+		"countriesVisited.0"  ----> India
+		"countriesVisited.4"  ----> spain
 
+
+#		Let say find the person who visit first country visit is united kingdom
+		
+Db.persons.find({"countryvisited.0":"united kingdom"},{_id=0, countryvisited:1})
+	
+> db.persons.find({"countriesVisited.0": "United Kingdom"},{countriesVisited:1,"name.first":1,_id:0});
+ { "name" : { "first" : "Jenny" }, "countriesVisited" : [ "United Kingdom" ] }
+{ "name" : { "first" : "Jenny" }, "countriesVisited" : [ "United Kingdom" ] }
+
+# this will display all the records where user visited uk anywhere and anytime
+		
+> Db.persons.find({"countryvisited":"united kingdom"},{_id=0, countryvisited:1})
+		
+{ "name" : { "first" : "Harish" }, "countriesVisited" : [ "India", "Singapore", "Thailand", "United Kingdom", "Spain", "Denmark", "United States of America" ] }
+{ "name" : { "first" : "Jenny" }, "countriesVisited" : [ "United Kingdom" ] }
+{ "name" : { "first" : "Jenny" }, "countriesVisited" : [ "United Kingdom" ] }
+{ "name" : { "first" : "Anita" }, "countriesVisited" : [ "India", "United Kingdom", "Canada", "United States of America" ] }
+
+
+		# Condition of embedded document		Here also embedded document will come in " "
+		
+		Db.persons.find({"name.first":"harish"},{_id:0,name:1})
+		
+	# Difference between embeded document and array document
+		
+	#	In array we put number that is for embedded  after '.' but in embeded document we have to mention key of embedded document .. 
+
+
+
+		
+		
+		# embedded  array 
+		
+		SUCH LIKE -:
+		
+		"languages" : [
+				{"name" : "Hindi","proficiency" : "Fluent"},
+				{"name" : "English","proficiency" : "Fluent"},
+				{"name" : "Sanskrit","proficiency" : "Intermediate"}
+			        ]
+		
+		
+		
+		For example -: 
+		
+		Person who is know to English and proficiency should be FLUENT
+	
+		
+		The below query gives error since it treat both condition separate BUT FOR SOLUTION BOTH CONDITION SHULD CHECK
+		IN SAME ARRAY ELEMENT ...
+		
+		
+		Db.persons.find({$and :[{"languages.name":"english"},{"languages.proeficiency":"fluent"}]},{_id:0,"name.first":1})
+		
+		
+		This  can be solved by elematch  ALSO THERE WILL NOT ANY $AND CONDITION
+	  The $elemMatch operator matches documents that contain an array field 
+		with at least one element that matches all the specified query criteria.
+	
+		{ <field>: { $elemMatch: { <query1>, <query2>, ... } } }
+	
+    db.persons.find({languages:{$elemMatch:{"name":"English","proficiency":"Fluent"}}},{_id:0,languages:1,"name.first":1})
+		
 
 
 
