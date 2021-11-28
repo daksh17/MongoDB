@@ -445,3 +445,35 @@ $set will
 	
 	#command to change the field name 
 	db.person.update({},{$rename:{"FirstName":"First_Name"}},{multi:true})
+
+
+
+
+	upsert -: If that name record exist then it will add new key value or update keyvalue everywhere 
+	
+		Db.person.Update ({name:'daksh'},{$set:{sal:100000}},{multi:true})
+		
+	If name daksh is not there then it will insert  the records (same as insert) also it will add salary column 
+	
+	 Db.person.Update ({name:'daksh'},{$set:{sal:100000}},{upsert:true})
+		
+	
+                                                    ##  delete 
+
+
+N is boolean with 0 and 1 (apart from 0 and 1 any positive number also behave like 1 )
+
+     > db.person.remove({gender:"F"})   -: delete all the records where gender like female 
+
+db.person.remove({gender:"M"},1) <<delete 1 st record where gender is male >
+      Or 
+db.person.remove({gender:"M"},100)  <<delete 1 st record where gender is male >
+
+
+
+We can not rollback any record in mongoDB.It will remove that just one record from the list and it could be any number except 0
+
+
+	• For dropping collection 
+
+ Db.<collectionName>.drop()
