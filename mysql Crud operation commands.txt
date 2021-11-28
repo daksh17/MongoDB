@@ -55,9 +55,9 @@ product
 
 
 
-Db.collection_name.insertMany({ })  -:it will insert one records 
+Db.collection_name.insert({ })  -:it will insert one records 
 
-Db.collection_name.insertMany([{ },{}])  -:it will insert multiple records 
+Db.collection_name.insert([{ },{}])  -:it will insert multiple records 
 
 
 db.DakshEmployee.insert(
@@ -185,7 +185,87 @@ WriteResult({ "nInserted" : 1 })
 > 
 
 
-#                                        operators 
+
+
+                                               ## operators ##
+
+
+	# $gt -: grater then 
+	
+	
+	Db.persons.find({year:{$gt: 1989}},{_id:0,name:1,year:1})
+	
+	# $LT Less then 
+	
+	Db.persons.find({year:{$lt: 1989}},{_id:0,name:1,year:1})
+	
+	
+
+	# $gt -: grater then equal to
+	
+	
+	Db.persons.find({year:{$gte: 1989}},{_id:0,name:1,year:1})
+	
+	# Less then equal to
+	
+	Db.persons.find({year:{$lte: 1989}},{_id:0,name:1,year:1})
+	
+	
+	# EQUAL TO 
+	Db.persons.find({year:{$eq: 1989}},{_id:0,name:1,year:1})
+	
+#	NOT EQUAL TO 
+	
+Db.persons.find({year:{$ne: 1989}},{_id:0,name:1,year:1})
+
+
+	
+# 	$and  $or $in require [array ]   like 	Where livesin =jaipur or livesin=mumbai
+	
+	Db.persons.find({ $or: [ {livesin:"Mumbai"} ,{livesin:"jaipur" }] },{_id:0,'name.first':1})
+	
+
+# The person who livesIn mumbai or jaipur  and year of birth less then 1980
+
+
+db.person.find({ $and: [{$or:[ {livesIn:'Mumbai'},{livesIn:'Jaipur'}]},{yearOfBirth:{$lte:1990}}]} ,{_id:0,'name.first':1})
+{ "name" : { "first" : "Harish" } }
+{ "name" : { "first" : "Narayan" } }
+{ "name" : { "first" : "Rita" } }
+{ "name" : { "first" : "Neeharika" } }
+
+##   $or operator and $in are not same but if we are fetching same field in condition then both gives same output
+	$in is better then $or since it read all document once to satisfy the condition but $or will read twice..
+	But if we are fetching 2 different variable  then we have to go with $or
+
+
+> db.person.find({ $or: [ {'livesIn':'Mumbai'} ,{'livesIn':"Jaipur" }] },{_id:0,'name.first':1})
+{ "name" : { "first" : "Harish" } }
+{ "name" : { "first" : "Narayan" } }
+{ "name" : { "first" : "Rita" } }
+{ "name" : { "first" : "Neeharika" } }
+> db.person.find({'livesIn':{$in:['Mumbai','Jaipur']}},{"yearOfBirth":1,_id:0,"name":1,livesIn:1});
+{ "name" : { "first" : "Harish", "last" : "Chandra" }, "yearOfBirth" : 1962, "livesIn" : "Mumbai" }
+{ "name" : { "first" : "Narayan", "last" : "Sundaram" }, "yearOfBirth" : 1960, "livesIn" : "Jaipur" }
+{ "name" : { "first" : "Rita", "last" : "Chauhan" }, "yearOfBirth" : 1989, "livesIn" : "Mumbai" }
+{ "name" : { "first" : "Neeharika", "last" : "Chauhan" }, "yearOfBirth" : 1988, "livesIn" : "Jaipur" }
+> 
+
+/*  $and operator and $all are not same but if we are fetching same field in condition then both gives same output
+$all is better then $and since it read all document once to satisfy the condition but $and will read twice..
+But if we are fetching 2 different variable  then we have to go with $and 
+Generally in nested array where we can use $all operator
+
+*/
+
+> db.person.find({$and :[{livesIn:"Mumbai"},{livesIn:"Jaipur"}]},{"yearOfBirth":1,_id:0,"name":1,livesIn:1});
+
+> db.person.find({livesIn:{$all:["Mumbai","Jaipur"]}},{"yearOfBirth":1,_id:0,"name":1,livesIn:1});
+ 
+
+		Like operator type scenario then we have to create text index in mongoDB  so we can search a value with entire document in one 
+Collection ..
+
 
 
 # alterNative to like operator 
@@ -211,8 +291,6 @@ WriteResult({ "nInserted" : 1 })
 { "_id" : ObjectId("61a05c042b878dd893497f76"), "First_Name" : "Rebecca" }
 { "_id" : ObjectId("61a05c042b878dd893497fa4"), "First_Name" : "Reuben" }
 > 
-
-
 
 
 
