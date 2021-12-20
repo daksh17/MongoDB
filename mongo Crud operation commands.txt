@@ -463,6 +463,9 @@ $set will
 
 N is boolean with 0 and 1 (apart from 0 and 1 any positive number also behave like 1 )
 
+# if we dont put any value it will drop all document 
+# and value like 1 except 0 delete only one document 
+
      > db.person.remove({gender:"F"})   -: delete all the records where gender like female 
 
 db.person.remove({gender:"M"},1) <<delete 1 st record where gender is male >
