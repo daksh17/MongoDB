@@ -1,0 +1,16 @@
+{
+    "name": "ResumeClusterMonday",
+    "type": "SCHEDULED",
+    "disabled": false,
+    "config": {
+        "schedule": "0 6 * * 1",
+        "skip_catchup_events": false
+    },
+    "event_processors": {
+        "FUNCTION": {
+            "config": {
+                "function_name": "Atlas_Triggers_ResumeClusterMonday_1733705700"
+            }
+        }
+    }
+}
