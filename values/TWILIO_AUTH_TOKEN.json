@@ -1,5 +1,0 @@
-{
-  "name": "TWILIO_AUTH_TOKEN",
-  "from_secret": true,
-  "value": "APP_SECRET_TWILIO_AUTH_TOKEN"
-}
