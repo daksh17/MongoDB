@@ -1,5 +1,5 @@
 {
-  "name": "scaleDownClusterDuringDay",
+  "name": "scaleDownClusterDuringNight",
   "type": "SCHEDULED",
   "config": {
     "schedule": "0 20 * * 1-5",
