@@ -1,0 +1,10 @@
+{
+    "name": "myRS",
+    "type": "mongodb-atlas",
+    "config": {
+        "clusterName": "myRS",
+        "readPreference": "primary",
+        "wireProtocolEnabled": false
+    },
+    "version": 1
+}
