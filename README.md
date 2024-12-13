@@ -1,6 +1,9 @@
 # App Services Examples
+
 This repository contains example use cases for [MongoDB Atlas App Services](https://www.mongodb.com/docs/atlas/app-services/).
+
 ## Triggers
+
 This repository contains the following example [Atlas Triggers](https://www.mongodb.com/docs/atlas/app-services/triggers/overview/).
 
 | Name                                                                                                                        | Trigger Type   | Description                                                                                                                                                                            |
